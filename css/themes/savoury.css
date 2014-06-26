@@ -1,0 +1,55 @@
+/*
+	COLOUR: #2B9A26
+*/
+
+.savoury {
+	background: #fff;
+	padding: 60px;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+	font-size: 13px;
+	line-height: 20px;
+	color: #111;
+}
+
+.savoury h1 {
+	border-top: 2px solid #2B9A26;
+	border-bottom: 5px solid #2B9A26;
+	padding: 7px;
+	color: #555;
+	font-size: 36px;
+	line-height: 40px;
+	text-align: center;
+	font-variant: small-caps;
+}
+
+.savoury .address {
+	text-align: center;
+	margin-top: 8px;
+}
+
+.savoury .section {
+	border-top: 2px solid #2B9A26;
+	margin-top: 35px;
+}
+
+.savoury .section .h2_wrapper {
+	color: #2B9A26;
+	margin-top: -24px;
+	margin-left: 30px;
+}
+
+.savoury .section h2 {
+	display: inline-block;
+	background: #fff;
+	padding: 10px;
+	font-variant: small-caps;
+	font-size: 19px;
+	line-height: 25px;
+	margin-bottom: -5px;
+}
+
+.savoury .zipcode_comma {
+	display: block;
+	visibility: hidden;
+	height: 0px;
+}

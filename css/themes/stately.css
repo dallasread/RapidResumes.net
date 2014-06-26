@@ -1,0 +1,55 @@
+/*
+	COLOUR: #4498A9
+*/
+
+.stately {
+	background: #fff;
+	padding: 30px;
+	font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-size: 13px;
+	line-height: 20px;
+	color: #111;
+}
+
+.stately h1 {
+	border-top: 2px solid #4498A9;
+	border-bottom: 5px solid #4498A9;
+	padding: 7px;
+	color: #4498A9;
+	font-size: 36px;
+	line-height: 40px;
+	text-align: center;
+	font-variant: small-caps;
+}
+
+.stately .address {
+	text-align: center;
+	margin-top: 8px;
+}
+
+.stately .section {
+	border-top: 2px solid #4498A9;
+	margin-top: 35px;
+}
+
+.stately .section .h2_wrapper {
+	color: #4498A9;
+	text-align: center;
+	margin-top: -24px;
+}
+
+.stately .section h2 {
+	display: inline-block;
+	background: #fff;
+	padding: 10px;
+	font-variant: small-caps;
+	font-size: 19px;
+	line-height: 25px;
+	margin-bottom: -5px;
+}
+
+.stately .zipcode_comma {
+	display: block;
+	visibility: hidden;
+	height: 0px;
+}

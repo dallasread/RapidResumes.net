@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beautiful, Job-Winning Resumes and Cover Letters - RapidResumes.net</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/themes/neat.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/themes/opulant.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/themes/stately.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/themes/savoury.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/themes/flange.css" type="text/css" media="screen" charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width">
+  </head>
+  <body>
+    <div class="main_loading"></div>
+    
+    <div id="nav" class="blue">
+      <div class="container">
+        <img src="imgs/logo_white.png" id="logo" class="show_step" data-step="1">
+        <ul class="steps">
+          <li class="show_step selected" data-step="1">
+            <span class="name">1. Choose A Template</span>
+            <span class="desc">Choose one of <span class="template_count">0</span> job-winning templates to stand out from the crowd.</span>
+          </li>
+          <li class="show_step" data-step="2">
+            <span class="name">2. Add Your Content</span>
+            <span class="desc">Click on a section to personalize your Rapid Resume.</span>
+          </li>
+          <li class="show_step" data-step="3">
+            <span class="name">3. Download / Print</span>
+            <span class="desc">Download, Print, and Save your resume to send to your potential employer.</span>
+          </li>
+          <li class="show_step hide" data-step="4">
+            <span class="name">Thanks!</span>
+            <span class="desc">Thanks for purchasing a Rapid Resume!</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="container">
+      
+      <div class="step selected" data-step="1">
+        <ul id="templates">
+          <li><img src="imgs/templates/stately.png" class="show_step" data-step="2" data-template="Stately"></li>
+          <li><img src="imgs/templates/opulant.png" class="show_step" data-step="2" data-template="Opulant"></li>
+          <li><img src="imgs/templates/neat.png" class="show_step" data-step="2" data-template="Neat"></li>
+          <li><img src="imgs/templates/savoury.png" class="show_step" data-step="2" data-template="Savoury"></li>
+          <li><img src="imgs/templates/flange.png" class="show_step" data-step="2" data-template="Flange"></li>
+        </ul>
+      </div>
+    
+      <div class="step" data-step="2">
+        <p id="current_template_name"></p>
+        <p class="next_and_prev try_next_template" data-direction="next">
+          Try our next template
+          <span class="small">You won't lose your info.</span>
+        </p>
+        <p class="next_and_prev" data-direction="next">&rarr;</p>
+        <p class="next_and_prev" data-direction="prev">&larr;</p>
+        <div id="resume" class="box"></div>
+      
+        <div class="next_button_wrapper">
+          <a href="#" class="show_step hide_on_paid button blue" data-step="3">Download &amp; Print My Resume &rarr;</a>
+        </div>
+      </div>
+    
+      <div class="step" data-step="3">
+        <div class="download_box box" style='text-align: center; '>
+          Need to edit your resume on another computer?<br>
+          <a data-href="http://rapidresumes.net/#!/" target="_blank" class="resume_link"></a>
+          <br><br>
+          <h2>Download &amp; Print your Resume now for only $19!</h2>
+          <p style="margin-top: -10px; margin-bottom: 40px; ">(You can still edit and change your template later)</p>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="X5YG5C5YS9H9L">
+            <select name="os0">
+            	<option value="Download Resume + Expert Job-Winning Analysis">$59.00 USD: Download Resume + Expert Job-Winning Analysis</option>
+            	<option value="Download Resume + Professional Resume Rewrite + Interview Coachi">$199.00 USD: Download Resume + Professional Resume Rewrite + Interview Coaching</option>
+            	<option value="Download Resume">$19.00 USD: Download Resume</option>
+            </select><br><br>
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="custom" id="resume_id">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          </form>
+          
+        </div>
+      </div>
+    
+      <div class="step hide" data-step="4">
+        <div class="download_box box">
+          <h2>Thanks for purchasing!</h2>
+          You should receive an email soon with your PDF, Doc, and RTF files.
+        </div>
+      </div>
+    
+    </div>
+    
+    <script type="text/html" id="resume_template">
+      <div class="header">
+        <h1 data-field="name"></h1>
+        <p class="address">
+          <span data-field="address"></span><span class="address_comma">, </span>
+          <span data-field="city"></span>, <span data-field="state"></span><span class="state_comma">, </span>
+          <span data-field="country"></span>, <span data-field="zipcode"></span><span class="zipcode_comma">, </span>
+          <span data-field="phone"></span><span class="phone_comma">, </span>
+          <span data-field="email"></span>
+        </p>
+      </div>
+      <div class="sections"></div>
+      <div class="new_sections">
+        <h3>Add a Section</h3>
+        <p class="add_section" data-type="paragraph">Paragraph</p>
+        <p class="add_section" data-type="text">Text</p>
+        <p class="add_section" data-type="timeline">Timeline</p>
+        <!--<p class="add_section" data-type="list">List</p>-->
+      </div>
+    </script>
+    
+    <script type="text/html" id="section_paragraph_template">
+      <div class="section" data-type="paragraph">
+        <p class="remove_section">-</p>
+        <div class="content" data-field="content"></div>
+      </div>
+    </script>
+    
+    <script type="text/html" id="section_text_template">
+      <div class="section" data-type="text">
+        <p class="remove_section">-</p>
+        <div class="h2_wrapper"><h2 data-field="title"></h2></div>
+        <div class="content" data-field="content"></div>
+      </div>
+    </script>
+    
+    <script type="text/html" id="section_timeline_template">
+      <div class="section" data-type="timeline">
+        <p class="remove_section">-</p>
+        <div class="h2_wrapper">Timeline - <h2 data-field="title"></h2></div>
+        <div class="content" data-field="content"></div>
+      </div>
+    </script>
+    
+    <!--<script type="text/html" id="section_list_template">
+      <div class="section" data-type="list">
+        <p class="remove_section">-</p>
+        <div class="h2_wrapper"><h2 data-field="title"></h2></div>
+        <ul class="content" data-field="content"></ul>
+      </div>
+    </script>-->
+    
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
+    <script type='text/javascript' src="js/firebase.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
+
+<!--
+  1. Add/Remove Experience
+  2. 2 MORE RESUMES WITH A COUPLE VARIATIONS
+  
+  - social sharing
+  - changes_saved_automatically
+  - objective_suggestions
+  
+  - add a cover letter (test with a button)
+  - add a reference sheet (test with a button)
+  - don't go... free 100 objectives ebook
+
+  - donations?
+  - paypal_checkout_variations (paypal button and custom button)
+-->

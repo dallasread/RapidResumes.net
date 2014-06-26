@@ -1,0 +1,69 @@
+/*
+	COLOUR: #ccc
+*/
+
+.neat {
+	background: #fff;
+	padding: 30px;
+	font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-size: 13px;
+	line-height: 20px;
+	color: #000;
+}
+
+.neat h1 {
+	border-top: 2px solid #ccc;
+	border-bottom: 5px solid #ccc;
+	padding: 7px;
+	color: #000;
+	font-size: 36px;
+	line-height: 40px;
+	text-align: center;
+	font-variant: small-caps;
+}
+
+.neat .header {
+	margin: 30px auto 60px;
+	width: 75%;
+}
+
+.neat .sections {
+	width: 75%;
+	margin: 0 auto;
+}
+
+.neat .address {
+	text-align: center;
+	margin-top: 8px;
+}
+
+.neat .section {
+	border-top: 2px solid #ccc;
+	margin-top: 35px;
+}
+
+.neat .section[data-type="paragraph"] {
+	border-top: 0 none;
+}
+
+.neat .section .h2_wrapper {
+	color: #000;
+	text-align: left;
+	margin-top: -25px;
+}
+
+.neat .section h2 {
+	display: inline-block;
+	background: #fff;
+	padding: 10px 10px 10px 0px;
+	font-variant: small-caps;
+	font-size: 19px;
+	line-height: 25px;
+	margin-bottom: -5px;
+}
+
+.neat .zipcode_comma {
+	display: block;
+	visibility: hidden;
+	height: 0px;
+}
