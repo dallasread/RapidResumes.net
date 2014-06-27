@@ -51,3 +51,7 @@
 	visibility: hidden;
 	height: 0px;
 }
+
+.flange .section[data-type="paragraph"], .flange .section[data-type="conclusion"], .flange .section[data-type="introduction"] {
+	border-top: 0 none;
+}

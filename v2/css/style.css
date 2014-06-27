@@ -404,7 +404,7 @@ em {
 }
 
 .register .button, .yes_button {
-  display: block;
+  display: inline-block;
   padding: 15px;
   text-decoration: none;
   border: 0;

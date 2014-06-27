@@ -4,7 +4,7 @@
 
 .opulant {
 	background: #fff;
-	padding: 30px;
+	padding: 50px;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	line-height: 20px;
@@ -52,4 +52,8 @@
 	display: block;
 	visibility: hidden;
 	height: 0px;
+}
+
+.opulant .section[data-type="paragraph"], .opulant .section[data-type="conclusion"], .opulant .section[data-type="introduction"] {
+	border-top: 0 none;
 }

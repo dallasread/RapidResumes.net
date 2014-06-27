@@ -53,3 +53,7 @@
 	visibility: hidden;
 	height: 0px;
 }
+
+.savoury .section[data-type="paragraph"], .savoury .section[data-type="conclusion"], .savoury .section[data-type="introduction"] {
+	border-top: 0 none;
+}

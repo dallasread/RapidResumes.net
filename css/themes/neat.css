@@ -42,7 +42,7 @@
 	margin-top: 35px;
 }
 
-.neat .section[data-type="paragraph"] {
+.neat .section[data-type="paragraph"], .neat .section[data-type="conclusion"], .neat .section[data-type="introduction"] {
 	border-top: 0 none;
 }
 

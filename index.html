@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="css/themes/stately.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="css/themes/savoury.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="css/themes/flange.css" type="text/css" media="screen" charset="utf-8">
-    <meta name="viewport" content="user-scalable=no,width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
   </head>
   <body>
     <div class="main_loading"></div>
@@ -58,32 +61,31 @@
         <p class="next_and_prev" data-direction="next">&rarr;</p>
         <p class="next_and_prev" data-direction="prev">&larr;</p>
         <div id="resume" class="box"></div>
+        <div class="new_sections">
+          <h3>Add Section:</h3>
+          <ul>
+            <li class="add_section" data-type="introduction">Introduction</li>
+            <li class="add_section" data-type="text">Summary</li>
+            <li class="add_section" data-type="experience">Experience</li>
+            <li class="add_section" data-type="education">Education</li>
+            <li class="add_section" data-type="conclusion">Conclusion</li>
+            <!--<p class="add_section" data-type="list">List</p>-->
+          </ul>
+        </div>
       
         <div class="next_button_wrapper">
-          <a href="#" class="show_step hide_on_paid button blue" data-step="3">Download &amp; Print My Resume &rarr;</a>
+          <p class="show_step hide_on_paid button blue" data-step="3">Download &amp; Print My Resume &rarr;</p>
         </div>
       </div>
     
       <div class="step" data-step="3">
         <div class="download_box box" style='text-align: center; '>
-          Need to edit your resume on another computer?<br>
+          Need to edit your resume on another computer? It's easy... just visit:<br>
           <a data-href="http://rapidresumes.net/#!/" target="_blank" class="resume_link"></a>
           <br><br>
           <h2>Download &amp; Print your Resume now for only $19!</h2>
           <p style="margin-top: -10px; margin-bottom: 40px; ">(You can still edit and change your template later)</p>
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="X5YG5C5YS9H9L">
-            <select name="os0">
-            	<option value="Download Resume + Expert Job-Winning Analysis">$59.00 USD: Download Resume + Expert Job-Winning Analysis</option>
-            	<option value="Download Resume + Professional Resume Rewrite + Interview Coachi">$199.00 USD: Download Resume + Professional Resume Rewrite + Interview Coaching</option>
-            	<option value="Download Resume">$19.00 USD: Download Resume</option>
-            </select><br><br>
-            <input type="hidden" name="currency_code" value="USD">
-            <input type="hidden" name="custom" id="resume_id">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-          </form>
-          
+          <img src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif">          
         </div>
       </div>
     
@@ -94,6 +96,11 @@
         </div>
       </div>
     
+    </div>
+    
+    <div class="section_meta">
+      <p class="drag_section">&varr;</p>
+      <p class="remove_section">x</p>
     </div>
     
     <script type="text/html" id="resume_template">
@@ -108,57 +115,62 @@
         </p>
       </div>
       <div class="sections"></div>
-      <div class="new_sections">
-        <h3>Add a Section</h3>
-        <p class="add_section" data-type="paragraph">Paragraph</p>
-        <p class="add_section" data-type="text">Text</p>
-        <p class="add_section" data-type="timeline">Timeline</p>
-        <!--<p class="add_section" data-type="list">List</p>-->
-      </div>
     </script>
     
-    <script type="text/html" id="section_paragraph_template">
-      <div class="section" data-type="paragraph">
-        <p class="remove_section">-</p>
-        <div class="content" data-field="content"></div>
+    <div id="section_templates">
+      
+      <div class="section" data-type="introduction">
+        <div class="content" data-field="content">{{ content }}</div>
       </div>
-    </script>
-    
-    <script type="text/html" id="section_text_template">
+      
+      <div class="section" data-type="conclusion">
+        <div class="content" data-field="content">{{ content }}</div>
+      </div>
+      
       <div class="section" data-type="text">
-        <p class="remove_section">-</p>
-        <div class="h2_wrapper"><h2 data-field="title"></h2></div>
-        <div class="content" data-field="content"></div>
+        <div class="h2_wrapper">
+          <h2 data-field="title">{{ title }}</h2>
+        </div>
+        <div class="content" data-field="content">{{ content }}</div>
       </div>
-    </script>
-    
-    <script type="text/html" id="section_timeline_template">
-      <div class="section" data-type="timeline">
-        <p class="remove_section">-</p>
-        <div class="h2_wrapper">Timeline - <h2 data-field="title"></h2></div>
-        <div class="content" data-field="content"></div>
+      
+      <div class="section" data-type="objective">
+        <div class="h2_wrapper">
+          <h2 data-field="title">{{ title }}</h2>
+        </div>
+        <div class="content" data-field="content">{{ content }}</div>
       </div>
-    </script>
-    
-    <!--<script type="text/html" id="section_list_template">
-      <div class="section" data-type="list">
-        <p class="remove_section">-</p>
-        <div class="h2_wrapper"><h2 data-field="title"></h2></div>
-        <ul class="content" data-field="content"></ul>
+      
+      <div class="section" data-type="experience">
+        <div class="h2_wrapper">
+          <h2 data-field="title">{{ title }}</h2>
+        </div>
+        <div class="content" data-field="content">{{ content }}</div>
       </div>
-    </script>-->
+      
+      <div class="section" data-type="education">
+        <div class="h2_wrapper">
+          <h2 data-field="title">{{ title }}</h2>
+        </div>
+        <div class="content" data-field="content">{{ content }}</div>
+      </div>
+      
+    </div>
     
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
     <script type='text/javascript' src="js/firebase.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="js/mustache.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>
 
 <!--
   1. Add/Remove Experience
-  2. 2 MORE RESUMES WITH A COUPLE VARIATIONS
+  2. Save Order
+  3. 2 MORE RESUMES WITH A COUPLE VARIATIONS
   
   - social sharing
   - changes_saved_automatically
@@ -170,4 +182,6 @@
 
   - donations?
   - paypal_checkout_variations (paypal button and custom button)
+
+  - do you want a specific section?
 -->
