@@ -35,13 +35,12 @@
 
 .flange .section .h2_wrapper {
 	display: inline-block;
-	background: #fff;
 	padding-bottom: 4px;
 	border-bottom: 2px solid #999;
 	display: block;
 	font-weight: bold;
-	font-size: 16px;
-	line-height: 16px;
+	font-size: 17px;
+	line-height: 17px;
 	color: #003A74;
 	margin-bottom: 5px;
 }
@@ -54,4 +53,34 @@
 
 .flange .section[data-type="paragraph"], .flange .section[data-type="conclusion"], .flange .section[data-type="introduction"] {
 	border-top: 0 none;
+}
+
+.flange .section .content.has_events {
+	margin-top: 10px;
+}
+
+
+.flange .section .event .company, .flange .section .event .title, .flange .section .event .date {
+	font-size: 14px;
+	line-height: 22px;
+	display: inline-block;
+	font-weight: bold;
+	color: #999;
+}
+
+.flange .section .event {
+	margin-bottom: 20px;
+	margin-left: 20px;
+}
+
+.flange .section .event .date {
+	float: right;
+}
+
+.flange .section .event .description {
+	margin-top: 3px;
+}
+
+.flange .section .event .event_title_clear {
+	display: inline-block;
 }

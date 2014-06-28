@@ -37,6 +37,10 @@
 	margin-top: 8px;
 }
 
+.neat .sections {
+	padding-bottom: 30px;
+}
+
 .neat .section {
 	border-top: 2px solid #ccc;
 	margin-top: 35px;
@@ -66,4 +70,23 @@
 	display: block;
 	visibility: hidden;
 	height: 0px;
+}
+
+.neat .section .event .company, .neat .section .event .title, .neat .section .event .date {
+	font-variant: small-caps;
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+}
+
+.neat .section .event {
+	margin-bottom: 20px;
+}
+
+.neat .section .event .date {
+	float: right;
+}
+
+.neat .section .event .event_title_clear {
+	display: inline-block;
 }

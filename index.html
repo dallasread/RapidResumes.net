@@ -26,7 +26,7 @@
           </li>
           <li class="show_step" data-step="2">
             <span class="name">2. Add Your Content</span>
-            <span class="desc">Click on a section to personalize your Rapid Resume.</span>
+            <span class="desc">Click on a section to personalize your Rapid Resume. Your changes are saved automatically.</span>
           </li>
           <li class="show_step" data-step="3">
             <span class="name">3. Download / Print</span>
@@ -60,7 +60,9 @@
         </p>
         <p class="next_and_prev" data-direction="next">&rarr;</p>
         <p class="next_and_prev" data-direction="prev">&larr;</p>
+        
         <div id="resume" class="box"></div>
+        
         <div class="new_sections">
           <h3>Add Section:</h3>
           <ul>
@@ -99,7 +101,7 @@
     </div>
     
     <div class="section_meta">
-      <p class="drag_section">&varr;</p>
+      <p class="move_section">&varr;</p>
       <p class="remove_section">x</p>
     </div>
     
@@ -145,14 +147,36 @@
         <div class="h2_wrapper">
           <h2 data-field="title">{{ title }}</h2>
         </div>
-        <div class="content" data-field="content">{{ content }}</div>
+        <div class="content has_events">
+          {{#events}}
+            <div class="event">
+              <p class="date">{{ date }}</p>
+              <h4 class="title">{{ title }}</h4>
+              <div class="event_title_clear">-</div>
+              <p class="company">{{ company }}</p>
+              <div class="event_company_clear"></div>
+              <div class="description">{{ description }}</div>
+            </div>
+          {{/events}}
+        </div>
       </div>
       
       <div class="section" data-type="education">
         <div class="h2_wrapper">
           <h2 data-field="title">{{ title }}</h2>
         </div>
-        <div class="content" data-field="content">{{ content }}</div>
+        <div class="content has_events">
+          {{#events}}
+            <div class="event">
+              <p class="date">{{ date }}</p>
+              <h4 class="title">{{ title }}</h4>
+              <div class="event_title_clear">-</div>
+              <p class="company">{{ company }}</p>
+              <div class="event_company_clear"></div>
+              <div class="description">{{ description }}</div>
+            </div>
+          {{/events}}
+        </div>
       </div>
       
     </div>
@@ -163,16 +187,17 @@
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="js/mustache.js"></script>
+    <script type="text/javascript" src="js/fastclick.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>
 
 <!--
-  1. Add/Remove Experience
-  2. Save Order
+  2. Add/Remove Experience
   3. 2 MORE RESUMES WITH A COUPLE VARIATIONS
+  4. Screenshot all templates again with full page
   
-  - social sharing
+  - social sharing to save
   - changes_saved_automatically
   - objective_suggestions
   

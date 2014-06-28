@@ -77,20 +77,6 @@ var RR = {
 		return true;
 	},
 	
-	makeSortable: function() {
-		$("#resume").sortable({
-			axis: "y",
-			items: ".section",
-			handle: ".drag_section",
-			placeholder: "ui-state-highlight",
-			start: function(e, ui) {
-	      ui.placeholder.height( ui.item.height() - 2 );
-				ui.placeholder.css("margin-top", ui.item.css("margin-top"));
-				ui.placeholder.css("margin-bottom", ui.item.css("margin-bottom"));
-	    }
-		});
-	},
-	
 	markAsPaid: function() {
 		$("[data-step='3']").hide();
 		$(".step.selected, .show_step.selected").removeClass("selected");
@@ -157,7 +143,11 @@ var RR = {
 		}
 		
 		data.id = id;
-		clone.find(".section").attr("data-id", data.id);
+		data.ordinal = data.ordinal || RR.findNextOrdinal();
+		clone.find(".section").attr({
+			"data-id": data.id,
+			"data-ordinal": data.ordinal
+		});
 		$($(".section_meta").html()).prependTo(clone.find(".section"));
 		var html = clone.html();
 		
@@ -171,10 +161,26 @@ var RR = {
 			data.content = data.content || RR.lipsum;
 		} else if (data.type == "experience") {
 			data.title = data.title || "Experience";
-			data.content = data.content || "2004";
+			if ($.isEmptyObject(data.events)) {
+				data.events = []
+				data.events.push({
+					date: "2010 - 2014",
+					title: "Job Title",
+					company: "Company Name",
+					description: RR.lipsum
+				});
+			}
 		} else if (data.type == "education") {
 			data.title = data.title || "Education";
-			data.content = data.content || "2005";
+			if ($.isEmptyObject(data.events)) {
+				data.events = []
+				data.events.push({
+					date: "2014",
+					title: "Programe Name",
+					company: "Institution Name",
+					description: RR.lipsum
+				});
+			}
 		}
 		
 		if (create) {
@@ -184,7 +190,31 @@ var RR = {
 		
 		var output = Mustache.render(html, data);
 		$(output).appendTo("#resume .sections");
-		RR.makeSortable();
+		RR.sortSections();
+		
+		$("#resume").sortable("refresh");
+	},
+	
+	findNextOrdinal: function() {
+		var maximum = 0;
+		var value = 0;
+
+		for (id in RR.me.resume.sections) {
+			value = parseInt(RR.me.resume.sections[id].ordinal);
+			if (value > maximum) { maximum = value; }
+		}
+		
+		return maximum + 1 + "";
+	},
+	
+	sortSections: function() {
+		arr = $("#resume .section")
+		arr.sort(function (a, b) {
+	    a = parseInt($(a).data("ordinal"));
+	    b = parseInt($(b).data("ordinal"));
+	    if (a > b) { return 1; } else if (a < b) { return -1; } else { return 0; }
+		});
+		$("#resume .sections").append(arr);
 	},
 	
 	setTemplate: function(template) {
@@ -223,7 +253,27 @@ $(function() {
 			$(".try_next_template").hide();
 		}
 
-		RR.makeSortable();
+		$("#resume").sortable({
+			axis: "y",
+			items: ".section",
+			handle: ".move_section",
+			placeholder: "ui-state-highlight",
+			start: function(e, ui) {
+	      ui.placeholder.height( ui.item.height() - 2 );
+				ui.placeholder.css("margin-top", ui.item.css("margin-top"));
+				ui.placeholder.css("margin-bottom", ui.item.css("margin-bottom"));
+	    },
+			update: function(e, ui) {
+				$("#resume .section").each(function(index) {
+					index += 1;
+					var id = $(this).data("id");
+					$(this).data("ordinal", index);
+					RR.db.child("resume").child("sections").child(id).child("ordinal").set(index);
+				});
+			}
+		});
+		
+		FastClick.attach(document.body);
 	});
 
 	$(document).on("click", ".show_step", function() {
@@ -280,11 +330,11 @@ $(function() {
 		return false;
 	});
 
-	$(document).on("mouseenter", "#resume .remove_section", function() {
+	$(document).on("mouseenter", "#resume .remove_section, #resume .move_section", function() {
 		$(this).closest(".section").addClass("highlight");
 	});
 
-	$(document).on("mouseleave", "#resume .remove_section", function() {
+	$(document).on("mouseleave", "#resume .remove_section, #resume .move_section", function() {
 		$(this).closest(".section").removeClass("highlight");
 	});
 
