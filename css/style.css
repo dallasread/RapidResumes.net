@@ -147,6 +147,36 @@ hr {
 	cursor: pointer;
 }
 
+.step_title {
+	padding: 50px 2%;	
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
+
+.step_title h1 {
+	font-weight: bold;
+	text-align: center;
+	font-size: 45px;
+	line-height: 57px;
+	color: #0061B6;
+	margin-bottom: 10px;
+}
+
+.step_title h2 {
+	color: #222;
+	font-size: 21px;
+	line-height: 30px;
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+.step_title h2.lighter {
+	color: #666;
+}
+
+.step_title h2.lightest {
+	color: #aaa;
+}
+
 .step[data-step="2"], .step[data-step="3"], .step[data-step="4"] {
 	padding: 70px 50px;
 }
@@ -156,7 +186,7 @@ hr {
 }
 
 #templates {
-	padding: 2%;
+	padding: 0 2% 2%;
 }
 
 #templates li {
@@ -480,7 +510,7 @@ hr {
 
 .belcher h4 {
 	display: block;
-	color: #0061B6;
+	color: #00386A;
 	font-size: 21px;
 	line-height: 30px;
 }
@@ -505,7 +535,7 @@ hr {
 	font-size: 23px;
 	margin: 20px 0;
 	padding: 17px 0px;
-	color: #0061B6;
+	color: #00386A;
 	text-transform: uppercase;
 	text-decoration: none;
 }

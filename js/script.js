@@ -119,6 +119,8 @@ var RR = {
 				$(".resume_link").text(href).attr("href", href);
 			}
 		}
+		
+		$("html, body").scrollTop(0);
 	},
 	
 	addDefaultSections: function() {
@@ -244,7 +246,6 @@ var RR = {
 		var resume = $("#resume_template");
 		var fields = ["name", "address", "city", "state", "country", "zipcode", "email", "phone", "subhead"];
 		$("#resume").attr("class", "box " + template.toLowerCase()).html( resume.html() );
-		$("html, body").scrollTop(0);
 		
 		for (var i = 0; i < fields.length; i++) {
 		  field = fields[i];
@@ -264,6 +265,7 @@ var RR = {
 		$("#templates .selected_template").removeClass("selected_template");
 		$("#templates img[data-template='" + template + "']").addClass("selected_template");
 		$("#current_template_name").text(template)
+		ga("send", "event", "template", "choose", template);
 	}
 };
 
@@ -280,11 +282,14 @@ $(function() {
 	});
 
 	$(document).on("click", ".show_step", function() {
-		RR.setStep( $(this).data("step") );
+		var step = $(this).data("step");
+		ga("send", "event", "step", "show", step);
+		RR.setStep(step);
 		return false;
 	});
 
 	$(document).on("click", "[data-template]", function() {
+		ga("send", "event", "template", "click");
 		RR.setTemplate( $(this).data("template") );
 		return false;
 	});
@@ -329,6 +334,7 @@ $(function() {
 		$(".try_next_template").fadeOut();
 	
 		RR.setTemplate( $("#templates li:eq(" + new_index + ") img").data("template") );
+		ga("send", "event", "step", "direction", direction);
 	
 		return false;
 	});
