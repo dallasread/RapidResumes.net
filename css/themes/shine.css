@@ -1,0 +1,106 @@
+/*
+	COLOUR: #BD5100
+*/
+
+.shine {
+	background: #fff;
+	padding: 40px 120px;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+	font-size: 12px;
+	line-height: 20px;
+	color: #111;
+}
+
+.shine h1 {
+	font-weight: bold;
+	margin: 11px 0 21px;
+	color: #BD5100;
+	font-size: 50px;
+	line-height: 50px;
+	text-transform: uppercase;
+}
+
+.shine .header {
+	margin: 0 auto;
+}
+
+.shine .sections {
+	margin: 0 auto;
+}
+
+.shine .address {
+	display: none;
+}
+
+.shine .pre_address {
+	font-size: 11px;
+	line-height: 17px;
+	color: #777;
+}
+
+.shine .zipcode_comma {
+	display: block;
+	visibility: hidden;
+	height: 0px;
+}
+
+.shine .subhead {
+	font-size: 18px;
+	line-height: 24px;
+	padding-bottom: 10px;
+}
+
+.shine .sections {
+	padding-bottom: 30px;
+}
+
+.shine .section {
+	border-top: 2px solid #ccc;
+	margin-top: 35px;
+}
+
+.shine .section[data-type="paragraph"], .shine .section[data-type="conclusion"], .shine .section[data-type="introduction"] {
+	border-top: 0 none;
+}
+
+.shine .section .h2_wrapper {
+	color: #BD5100;
+	text-align: left;
+	margin-top: -25px;
+}
+
+.shine .section h2 {
+	display: inline-block;
+	background: #fff;
+	padding: 10px 10px 10px 0px;
+	font-size: 19px;
+	line-height: 25px;
+	margin-bottom: -5px;
+}
+
+.shine .section .event .company, .shine .section .event .title, .shine .section .event .date {
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+	font-weight: bold;
+}
+
+.shine .section .event {
+	margin-bottom: 20px;
+}
+
+.shine .section .event:last-child {
+	margin-bottom: 0;
+}
+
+.shine .section .event .date {
+	float: right;
+}
+
+.shine .section .event .event_title_clear {
+	display: inline-block;
+}
+
+.shine .content {
+	text-align: justify;
+}

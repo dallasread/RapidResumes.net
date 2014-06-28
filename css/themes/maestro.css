@@ -1,0 +1,96 @@
+/*
+	COLOUR: #999
+*/
+
+.maestro {
+	background: #fff;
+	padding: 40px;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+	font-size: 12px;
+	line-height: 20px;
+	color: #111;
+}
+
+.maestro h1 {
+	font-weight: bold;
+	margin: 10px 0 21px;
+	color: #000;
+	font-size: 50px;
+	line-height: 50px;
+	text-transform: uppercase;
+}
+
+.maestro .header {
+	margin: 0 auto;
+}
+
+.maestro .sections {
+	margin: 0 auto;
+}
+
+.maestro .address {
+	display: none;
+}
+
+.maestro .pre_address {
+	font-size: 11px;
+	line-height: 18px;
+	color: #999;
+}
+
+.maestro .subhead {
+	font-size: 18px;
+	line-height: 24px;
+	padding-bottom: 10px;
+}
+
+.maestro .sections {
+	padding-bottom: 30px;
+}
+
+.maestro .section {
+	border-top: 2px solid #ccc;
+	margin-top: 35px;
+}
+
+.maestro .section[data-type="paragraph"], .maestro .section[data-type="conclusion"], .maestro .section[data-type="introduction"] {
+	border-top: 0 none;
+}
+
+.maestro .section .h2_wrapper {
+	color: #999;
+	text-align: left;
+	margin-top: -25px;
+}
+
+.maestro .section h2 {
+	display: inline-block;
+	background: #fff;
+	padding: 10px 10px 10px 0px;
+	font-size: 19px;
+	line-height: 25px;
+	margin-bottom: -5px;
+}
+
+.maestro .section .event .company, .maestro .section .event .title, .maestro .section .event .date {
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+	font-weight: bold;
+}
+
+.maestro .section .event {
+	margin-bottom: 20px;
+}
+
+.maestro .section .event:last-child {
+	margin-bottom: 0;
+}
+
+.maestro .section .event .date {
+	float: right;
+}
+
+.maestro .section .event .event_title_clear {
+	display: inline-block;
+}

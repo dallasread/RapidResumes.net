@@ -83,10 +83,18 @@
 	margin-bottom: 20px;
 }
 
+.neat .section .event:last-child {
+	margin-bottom: 0;
+}
+
 .neat .section .event .date {
 	float: right;
 }
 
 .neat .section .event .event_title_clear {
 	display: inline-block;
+}
+
+.neat .pre_address, .neat .subhead {
+	display: none;
 }

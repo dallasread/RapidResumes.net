@@ -1,0 +1,105 @@
+/*
+	COLOUR: #111
+*/
+
+.barge {
+	background: #fff;
+	padding: 40px 120px;
+font-family: Georgia, Times, "Times New Roman", serif;
+	font-size: 12px;
+	line-height: 20px;
+	color: #111;
+}
+
+.barge h1 {
+	font-weight: bold;
+	margin: 11px 0 5px;
+	color: #111;
+	font-size: 46px;
+	line-height: 46px;
+	text-transform: uppercase;
+}
+
+.barge .header {
+	margin: 0 auto;
+}
+
+.barge .sections {
+	margin: 0 auto;
+}
+
+.barge .pre_address {
+	display: none;
+}
+
+.barge .address {
+	font-size: 11px;
+	line-height: 17px;
+	color: #777;
+	margin-bottom: 20px;
+}
+
+.barge .zipcode_comma {
+	display: block;
+	visibility: hidden;
+	height: 0px;
+}
+
+.barge .subhead {
+	font-size: 18px;
+	line-height: 24px;
+	padding-bottom: 10px;
+	color: #777;
+}
+
+.barge .sections {
+	padding-bottom: 30px;
+}
+
+.barge .section {
+	border-top: 2px solid #ccc;
+	margin-top: 35px;
+}
+
+.barge .section[data-type="paragraph"], .barge .section[data-type="conclusion"], .barge .section[data-type="introduction"] {
+	border-top: 0 none;
+}
+
+.barge .section .h2_wrapper {
+	color: #111;
+	text-align: left;
+	margin-top: -25px;
+}
+
+.barge .section h2 {
+	display: inline-block;
+	background: #fff;
+	padding: 10px 10px 10px 0px;
+	font-size: 19px;
+	line-height: 25px;
+	margin-bottom: -5px;
+}
+
+.barge .section .event .company, .barge .section .event .title, .barge .section .event .date {
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+	font-weight: bold;
+}
+
+.barge .section .event {
+	margin-bottom: 20px;
+	margin-left: 30px;
+}
+
+.barge .section .event:last-child {
+	margin-bottom: 0;
+}
+
+.barge .section .event .date {
+	float: right;
+}
+
+.barge .section .event .event_title_clear {
+	display: inline-block;
+}

@@ -69,10 +69,18 @@
 	margin-bottom: 20px;
 }
 
+.opulant .section .event:last-child {
+	margin-bottom: 0;
+}
+
 .opulant .section .event .date {
 	float: right;
 }
 
 .opulant .section .event .event_title_clear {
 	display: inline-block;
+}
+
+.opulant .pre_address, .opulant .subhead {
+	display: none;
 }

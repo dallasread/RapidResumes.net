@@ -12,12 +12,11 @@
 }
 
 .stately h1 {
-	border-top: 2px solid #4498A9;
 	border-bottom: 5px solid #4498A9;
-	padding: 7px;
+	padding: 0px 7px 7px;
 	color: #4498A9;
-	font-size: 36px;
-	line-height: 40px;
+	font-size: 50px;
+	line-height: 60px;
 	text-align: center;
 	font-variant: small-caps;
 }
@@ -25,6 +24,7 @@
 .stately .address {
 	text-align: center;
 	margin-top: 8px;
+	padding-bottom: 20px;
 }
 
 .stately .section {
@@ -69,10 +69,18 @@
 	margin-bottom: 20px;
 }
 
+.stately .section .event:last-child {
+	margin-bottom: 0;
+}
+
 .stately .section .event .date {
 	float: right;
 }
 
 .stately .section .event .event_title_clear {
 	display: inline-block;
+}
+
+.stately .pre_address, .stately .subhead {
+	display: none;
 }

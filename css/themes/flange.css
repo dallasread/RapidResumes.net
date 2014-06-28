@@ -5,7 +5,7 @@
 .flange {
 	background: #fff;
 	padding: 60px;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
 	font-size: 13px;
 	line-height: 20px;
 	color: #333;
@@ -14,10 +14,9 @@
 .flange h1 {
 	text-align: right;
 	color: #003A74;
-	font-size: 48px;
-	line-height: 48px;
-	font-weight: bold;
-	margin-bottom: 7px;
+	font-size: 60px;
+	line-height: 60px;
+	margin-bottom: 9px;
 }
 
 .flange .address {
@@ -38,7 +37,6 @@
 	padding-bottom: 4px;
 	border-bottom: 2px solid #999;
 	display: block;
-	font-weight: bold;
 	font-size: 17px;
 	line-height: 17px;
 	color: #003A74;
@@ -64,13 +62,16 @@
 	font-size: 14px;
 	line-height: 22px;
 	display: inline-block;
-	font-weight: bold;
 	color: #999;
 }
 
 .flange .section .event {
 	margin-bottom: 20px;
-	margin-left: 20px;
+	margin-left: 40px;
+}
+
+.flange .section .event:last-child {
+	margin-bottom: 0;
 }
 
 .flange .section .event .date {
@@ -79,4 +80,8 @@
 
 .flange .section .event .event_title_clear {
 	display: inline-block;
+}
+
+.flange .pre_address, .flange .subhead {
+	display: none;
 }

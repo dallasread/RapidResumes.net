@@ -1,5 +1,5 @@
 /*
-	COLOUR: #2B9A26
+	COLOUR: #1F721C
 */
 
 .savoury {
@@ -12,28 +12,27 @@
 }
 
 .savoury h1 {
-	border-top: 2px solid #2B9A26;
-	border-bottom: 5px solid #2B9A26;
 	padding: 7px;
-	color: #555;
-	font-size: 36px;
-	line-height: 40px;
+	color: #1F721C;
+	font-size: 55px;
+	line-height: 55px;
 	text-align: center;
 	font-variant: small-caps;
 }
 
 .savoury .address {
 	text-align: center;
-	margin-top: 8px;
+	padding-bottom: 20px;
+	color: #777;
 }
 
 .savoury .section {
-	border-top: 2px solid #2B9A26;
+	border-top: 2px solid #1F721C;
 	margin-top: 35px;
 }
 
 .savoury .section .h2_wrapper {
-	color: #2B9A26;
+	color: #1F721C;
 	margin-top: -24px;
 	margin-left: 30px;
 }
@@ -69,6 +68,10 @@
 	margin-bottom: 20px;
 }
 
+.savoury .section .event:last-child {
+	margin-bottom: 0;
+}
+
 .savoury .section .event .company {
 	display: inline-block;
 	font-weight: normal;
@@ -83,4 +86,8 @@
 
 .savoury .section .event .event_title_clear {
 	display: inline-block;
+}
+
+.savoury .pre_address, .savoury .subhead {
+	display: none;
 }

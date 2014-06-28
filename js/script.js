@@ -8,17 +8,18 @@ var RRHelpers = {
 			randomstring += chars.substring(rnum, rnum + 1);
 		}
 		return randomstring.toLowerCase();
-	}
+	},
+	
+	lipsum: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness."
 }
 
 var RR = {
-	lipsum: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
-	
 	me: {
 		id: RRHelpers.generateToken(),
 		template: "Stately",
 		resume: {
 			name: "Your Name",
+			subhead: RRHelpers.lipsum,
 			address: "123 Your Address",
 			city: "Super City",
 			state: "Wyoming",
@@ -153,12 +154,12 @@ var RR = {
 		
 		if (data.type == "text") {
 			data.title = data.title || "Professional Summary";
-			data.content = data.content || RR.lipsum;
+			data.content = data.content || RRHelpers.lipsum;
 		} else if (data.type == "objective") {
 			data.title = data.title || "Objective";
-			data.content = data.content || RR.lipsum;
+			data.content = data.content || RRHelpers.lipsum;
 		} else if (data.type == "paragraph" || data.type == "introduction" || data.type == "conclusion") {
-			data.content = data.content || RR.lipsum;
+			data.content = data.content || RRHelpers.lipsum;
 		} else if (data.type == "experience") {
 			data.title = data.title || "Experience";
 			if ($.isEmptyObject(data.events)) {
@@ -167,7 +168,7 @@ var RR = {
 					date: "2010 - 2014",
 					title: "Job Title",
 					company: "Company Name",
-					description: RR.lipsum
+					description: RRHelpers.lipsum
 				});
 			}
 		} else if (data.type == "education") {
@@ -178,7 +179,7 @@ var RR = {
 					date: "2014",
 					title: "Programe Name",
 					company: "Institution Name",
-					description: RR.lipsum
+					description: RRHelpers.lipsum
 				});
 			}
 		}
@@ -191,8 +192,7 @@ var RR = {
 		var output = Mustache.render(html, data);
 		$(output).appendTo("#resume .sections");
 		RR.sortSections();
-		
-		$("#resume").sortable("refresh");
+		RR.makeSortable();
 	},
 	
 	findNextOrdinal: function() {
@@ -217,10 +217,32 @@ var RR = {
 		$("#resume .sections").append(arr);
 	},
 	
+	makeSortable: function() {
+		$("#resume").sortable({
+			axis: "y",
+			items: ".section",
+			handle: ".move_section",
+			placeholder: "ui-state-highlight",
+			start: function(e, ui) {
+	      ui.placeholder.height( ui.item.outerHeight() - 2 );
+				ui.placeholder.css("margin-top", ui.item.css("margin-top"));
+				ui.placeholder.css("margin-bottom", ui.item.css("margin-bottom"));
+	    },
+			update: function(e, ui) {
+				$("#resume .section").each(function(index) {
+					index += 1;
+					var id = $(this).data("id");
+					$(this).data("ordinal", index);
+					RR.db.child("resume").child("sections").child(id).child("ordinal").set(index);
+				});
+			}
+		});
+	},
+	
 	setTemplate: function(template) {
 		var field = null;
 		var resume = $("#resume_template");
-		var fields = ["name", "address", "city", "state", "country", "zipcode", "email", "phone"];
+		var fields = ["name", "address", "city", "state", "country", "zipcode", "email", "phone", "subhead"];
 		$("#resume").attr("class", "box " + template.toLowerCase()).html( resume.html() );
 		$("html, body").scrollTop(0);
 		
@@ -253,26 +275,7 @@ $(function() {
 			$(".try_next_template").hide();
 		}
 
-		$("#resume").sortable({
-			axis: "y",
-			items: ".section",
-			handle: ".move_section",
-			placeholder: "ui-state-highlight",
-			start: function(e, ui) {
-	      ui.placeholder.height( ui.item.height() - 2 );
-				ui.placeholder.css("margin-top", ui.item.css("margin-top"));
-				ui.placeholder.css("margin-bottom", ui.item.css("margin-bottom"));
-	    },
-			update: function(e, ui) {
-				$("#resume .section").each(function(index) {
-					index += 1;
-					var id = $(this).data("id");
-					$(this).data("ordinal", index);
-					RR.db.child("resume").child("sections").child(id).child("ordinal").set(index);
-				});
-			}
-		});
-		
+		RR.makeSortable();
 		FastClick.attach(document.body);
 	});
 
@@ -379,5 +382,13 @@ $(function() {
 			$("#upsell").fadeOut(111);
 			$(".loading").hide();
 		}
+	});
+	
+	$(document).on("click", ".belcher", function() {
+		var price = parseFloat($(".price").text().replace("$", ""));
+		$(".main_loading").show();
+		ga("send", "event", "resume", "purchase", price);
+		window.location = $(this).data("href");
+		return false;
 	});
 });
