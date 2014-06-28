@@ -57,3 +57,22 @@
 .stately .section[data-type="paragraph"], .stately .section[data-type="conclusion"], .stately .section[data-type="introduction"] {
 	border-top: 0 none;
 }
+
+.stately .section .event .company, .stately .section .event .title, .stately .section .event .date {
+	font-variant: small-caps;
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+}
+
+.stately .section .event {
+	margin-bottom: 20px;
+}
+
+.stately .section .event .date {
+	float: right;
+}
+
+.stately .section .event .event_title_clear {
+	display: inline-block;
+}

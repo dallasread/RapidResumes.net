@@ -57,3 +57,22 @@
 .opulant .section[data-type="paragraph"], .opulant .section[data-type="conclusion"], .opulant .section[data-type="introduction"] {
 	border-top: 0 none;
 }
+
+.opulant .section .event .company, .opulant .section .event .title, .opulant .section .event .date {
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+}
+
+.opulant .section .event {
+	margin-bottom: 20px;
+}
+
+.opulant .section .event .date {
+	float: right;
+}
+
+.opulant .section .event .event_title_clear {
+	display: inline-block;
+}

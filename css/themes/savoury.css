@@ -57,3 +57,30 @@
 .savoury .section[data-type="paragraph"], .savoury .section[data-type="conclusion"], .savoury .section[data-type="introduction"] {
 	border-top: 0 none;
 }
+
+.savoury .section .event .title, .savoury .section .event .date {
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 23px;
+	display: inline-block;
+}
+
+.savoury .section .event {
+	margin-bottom: 20px;
+}
+
+.savoury .section .event .company {
+	display: inline-block;
+	font-weight: normal;
+	font-style: oblique;
+	font-size: 15px;
+	line-height: 23px;
+}
+
+.savoury .section .event .date {
+	float: right;
+}
+
+.savoury .section .event .event_title_clear {
+	display: inline-block;
+}

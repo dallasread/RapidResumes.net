@@ -77,10 +77,6 @@
 	float: right;
 }
 
-.flange .section .event .description {
-	margin-top: 3px;
-}
-
 .flange .section .event .event_title_clear {
 	display: inline-block;
 }
