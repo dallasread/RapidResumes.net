@@ -10,7 +10,15 @@ var RRHelpers = {
 		return randomstring.toLowerCase();
 	},
 	
-	lipsum: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness."
+	lipsum: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
+	
+	eventsToArray: function() {
+		var events = [];
+		for (id in this.events) {
+			events.push(this.events[id]);
+		}
+		return events;
+	}
 }
 
 var RR = {
@@ -126,8 +134,8 @@ var RR = {
 	addDefaultSections: function() {
 		RR.addSection({ type: "introduction" }, false);
 		RR.addSection({ type: "text", title: "Professional Summary" }, false);
-		RR.addSection({ type: "text", title: "Skills" }, false);
 		RR.addSection({ type: "experience", title: "Experience" }, false);
+		RR.addSection({ type: "text", title: "Skills" }, false);
 		RR.addSection({ type: "education", title: "Education" }, false);
 		RR.addSection({ type: "text", title: "Certifications" }, false);
 		RR.addSection({ type: "text", title: "References" }, false);
@@ -146,7 +154,7 @@ var RR = {
 		}
 		
 		data.id = id;
-		data.ordinal = data.ordinal || RR.findNextOrdinal();
+		data.ordinal = data.ordinal || RR.findNextOrdinal(RR.me.resume.sections);
 		clone.find(".section").attr({
 			"data-id": data.id,
 			"data-ordinal": data.ordinal
@@ -164,25 +172,33 @@ var RR = {
 			data.content = data.content || RRHelpers.lipsum;
 		} else if (data.type == "experience") {
 			data.title = data.title || "Experience";
+			
 			if ($.isEmptyObject(data.events)) {
-				data.events = []
-				data.events.push({
+				var event_id = RRHelpers.generateToken();
+				data.events = {}
+				data.events[event_id] = {
+					id: event_id,
+					ordinal: RR.findNextOrdinal(data.events),
 					date: "2010 - 2014",
 					title: "Job Title",
 					company: "Company Name",
-					description: RRHelpers.lipsum
-				});
+					description: RRHelpers.lipsum	
+				}
 			}
 		} else if (data.type == "education") {
 			data.title = data.title || "Education";
+			
 			if ($.isEmptyObject(data.events)) {
-				data.events = []
-				data.events.push({
-					date: "2014",
-					title: "Programe Name",
-					company: "Institution Name",
+				var event_id = RRHelpers.generateToken();
+				data.events = {}
+				data.events[event_id] = {
+					id: event_id,
+					ordinal: RR.findNextOrdinal(data.events),
+					date: "2013",
+					title: "Programme Name",
+					institution: "Institution Name",
 					description: RRHelpers.lipsum
-				});
+				}
 			}
 		}
 		
@@ -191,32 +207,50 @@ var RR = {
 			RR.db.child("resume").child("sections").child(id).set(data);
 		}
 		
+		if (data.type == "education" || data.type == "experience") {
+			data.events_array = RRHelpers.eventsToArray;
+		}
+		
 		var output = Mustache.render(html, data);
-		$(output).appendTo("#resume .sections");
-		RR.sortSections();
+		$(output).hide().appendTo("#resume .sections").show(250);
+		RR.sortSections( $("#resume .section"), $("#resume .sections") );
 		RR.makeSortable();
+		RR.hideEventsFirstRemove();
 	},
 	
-	findNextOrdinal: function() {
+	findNextOrdinal: function(objects) {
 		var maximum = 0;
 		var value = 0;
 
-		for (id in RR.me.resume.sections) {
-			value = parseInt(RR.me.resume.sections[id].ordinal);
+		for (id in objects) {
+			value = parseInt(objects[id].ordinal);
 			if (value > maximum) { maximum = value; }
 		}
 		
 		return maximum + 1 + "";
 	},
 	
-	sortSections: function() {
-		arr = $("#resume .section")
+	sortSections: function(children, wrapper) {
+		arr = children;
 		arr.sort(function (a, b) {
-	    a = parseInt($(a).data("ordinal"));
-	    b = parseInt($(b).data("ordinal"));
+	    a = parseInt($(a).attr("data-ordinal"));
+	    b = parseInt($(b).attr("data-ordinal"));
 	    if (a > b) { return 1; } else if (a < b) { return -1; } else { return 0; }
 		});
-		$("#resume .sections").append(arr);
+		wrapper.append(arr);
+		
+		if (arr.find(".event").length) {
+			arr.each(function() {
+				RR.sortSections( $(this).find(".event"), $(this).find(".events") );
+			});
+		}
+	},
+	
+	hideEventsFirstRemove: function() {
+		$("#resume .has_events").each(function() {
+			$(this).find(".remove_event:not(:first)").show();
+			$(this).find(".remove_event:first").hide();
+		});
 	},
 	
 	makeSortable: function() {
@@ -234,8 +268,33 @@ var RR = {
 				$("#resume .section").each(function(index) {
 					index += 1;
 					var id = $(this).data("id");
-					$(this).data("ordinal", index);
+					$(this).attr("data-ordinal", index);
 					RR.db.child("resume").child("sections").child(id).child("ordinal").set(index);
+				});
+			}
+		});
+		
+		$("#resume .events").sortable({
+			axis: "y",
+			items: ".event",
+			handle: ".move_event",
+			placeholder: "ui-state-highlight",
+			start: function(e, ui) {
+	      ui.placeholder.height( ui.item.outerHeight() - 2 );
+				ui.placeholder.css("margin-top", ui.item.css("margin-top"));
+				ui.placeholder.css("margin-bottom", ui.item.css("margin-bottom"));
+	    },
+			update: function(e, ui) {
+				RR.hideEventsFirstRemove();
+				$("#resume .section").each(function(index) {
+					var section_id = $(this).data("id");
+
+					$(this).find(".event").each(function(index) {
+						var id = $(this).data("id");
+						index += 1;
+						$(this).attr("data-ordinal", index);
+						RR.db.child("resume").child("sections").child(section_id).child("events").child(id).child("ordinal").set(index);
+					});
 				});
 			}
 		});
@@ -265,7 +324,7 @@ var RR = {
 		$("#templates .selected_template").removeClass("selected_template");
 		$("#templates img[data-template='" + template + "']").addClass("selected_template");
 		$("#current_template_name").text(template)
-		ga("send", "event", "template", "choose", template);
+		ga("send", "event", "template", "set", template);
 	}
 };
 
@@ -283,23 +342,29 @@ $(function() {
 
 	$(document).on("click", ".show_step", function() {
 		var step = $(this).data("step");
-		ga("send", "event", "step", "show", step);
+		ga("send", "event", "step", "set", step);
 		RR.setStep(step);
 		return false;
 	});
 
 	$(document).on("click", "[data-template]", function() {
-		ga("send", "event", "template", "click");
-		RR.setTemplate( $(this).data("template") );
+		var template = $(this).data("template");
+		ga("send", "event", "template", "choose_from_screenshot", template);
+		RR.setTemplate(template);
 		return false;
 	});
 
 	$(document).on("blur", "[data-field]", function() {
+		var event = $(this).closest(".event");
 		var section = $(this).closest(".section");
 		var field = $(this).data("field");
 		var value = $(this).text();
 	
-		if (section.length) {
+		if (event.length) {
+			var id = event.data("id");
+			RR.me.resume["sections"][section.data("id")]["events"][id][field] = value;
+			RR.db.child("resume").child("sections").child(section.data("id")).child("events").child(id).child(field).set(value);
+		} else if (section.length) {
 			var type = section.data("type");
 			var id = section.data("id");
 			if (typeof id === "undefined") { id = RRHelpers.generateToken(); section.data("id", id); }
@@ -334,13 +399,21 @@ $(function() {
 		$(".try_next_template").fadeOut();
 	
 		RR.setTemplate( $("#templates li:eq(" + new_index + ") img").data("template") );
-		ga("send", "event", "step", "direction", direction);
+		ga("send", "event", "template", "direction", direction);
 	
 		return false;
 	});
 
 	$(document).on("mouseenter", "#resume .remove_section, #resume .move_section", function() {
 		$(this).closest(".section").addClass("highlight");
+	});
+
+	$(document).on("mouseleave", "#resume .remove_event, #resume .move_event", function() {
+		$(this).closest(".event").removeClass("highlight");
+	});
+	
+	$(document).on("mouseenter", "#resume .remove_event, #resume .move_event", function() {
+		$(this).closest(".event").addClass("highlight");
 	});
 
 	$(document).on("mouseleave", "#resume .remove_section, #resume .move_section", function() {
@@ -356,13 +429,33 @@ $(function() {
 		var section = $(this).closest(".section");
 		section.addClass("highlight");
 	
-		if (confirm("Are you sure you want to remove this section?")) {
+		if (confirm("Are you sure ee this section?")) {
 			delete RR.me.resume["sections"][section.data("id")]
 			RR.db.child("resume").child("sections").child(section.data("id")).remove();
-			section.remove();
+			section.hide(250, function() {
+				$(this).remove();
+			});
 		}
 	
 		section.removeClass("highlight");
+	});
+	
+	$(document).on("click", "#resume .remove_event", function() {
+		var section = $(this).closest(".section");
+		var event = $(this).closest(".event");
+		event.addClass("highlight");
+	
+		if (confirm("Are you sure you want to remove this event?")) {
+			console.log(event.data("id"))
+			delete RR.me.resume["sections"][section.data("id")]["events"][event.data("id")];
+			RR.db.child("resume").child("sections").child(section.data("id")).child("events").child(event.data("id")).remove();
+			event.hide(250, function() {
+				$(this).remove();
+			});
+		}
+		
+		event.removeClass("highlight");
+		RR.hideEventsFirstRemove();
 	});
 
 	$(document).on("click", ".add_section", function() {
@@ -394,7 +487,42 @@ $(function() {
 		var price = parseFloat($(".price").text().replace("$", ""));
 		$(".main_loading").show();
 		ga("send", "event", "resume", "purchase", price);
-		window.location = $(this).data("href");
+		$("#paypal_form").trigger("submit");
 		return false;
+	});
+	
+	$(document).on("click", ".add_event", function() {
+		var section = $(this).closest(".section");
+		var type = section.data("type");
+		var section_id = section.data("id");
+		var id = RRHelpers.generateToken();
+		var clone = $(this).closest(".has_events").find(".event:first").clone();
+
+		RR.me.resume["sections"][section_id]["events"] = RR.me.resume["sections"][section_id]["events"] || {}
+		RR.me.resume["sections"][section_id]["events"][id] = {
+			id: id,
+			ordinal: RR.findNextOrdinal(RR.me.resume["sections"][section_id]["events"]),
+			date: "2010 - 2014",
+			title: "Job Title",
+			description: RRHelpers.lipsum
+		};
+		
+		if (type == "experience") {
+			RR.me.resume["sections"][section_id]["events"][id]["company"] = "Company Name";
+		} else if (type == "education") {
+			RR.me.resume["sections"][section_id]["events"][id]["institution"] = "Institution Name";
+		}
+		
+		RR.db.child("resume").child("sections").child(section_id).child("events").child(id).set(
+			RR.me.resume["sections"][section_id]["events"][id]
+		);
+		
+		clone.find("[data-field]").each(function() {
+			$(this).text(RR.me.resume["sections"][section_id]["events"][id][$(this).data("field")]);
+		});
+		
+		clone.hide().insertBefore(this).data("id", id).show(250);
+		RR.makeSortable();
+		RR.hideEventsFirstRemove();
 	});
 });

@@ -236,7 +236,7 @@ hr {
 
 [data-field] {
 	outline: none;
-	min-width: 3em;
+	min-width: 1em;
 	min-height: 1em;
 }
 
@@ -262,6 +262,7 @@ hr {
 }
 
 .button {
+	cursor: pointer;
 	padding: 10px 20px;
 	color: #fff;
 	display: inline-block;
@@ -271,6 +272,10 @@ hr {
 
 .blue {
 	background: #0061B6;
+}
+
+.gray {
+	background: #bbb;
 }
 
 .next_button_wrapper {
@@ -564,4 +569,40 @@ hr {
 
 .clear {
 	clear: both;
+}
+
+.event {
+	position: relative;
+}
+
+.event .move_event, .event .remove_event {
+	background: #ccc;
+	color: #fff;
+	display: inline-block;
+	padding: 4px 0px 4px;
+	text-align: center;
+	width: 29px;
+	margin-top: 4px;
+	cursor: pointer;
+	border-radius: 4px;
+	position: absolute;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.event .move_event {
+	left: 0;
+	margin-left: -40px;
+}
+
+.event .remove_event {
+	right: 0;
+	margin-right: -40px;
+}
+
+.events {
+	margin-bottom: 20px;
 }

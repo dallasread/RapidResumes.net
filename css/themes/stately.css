@@ -75,6 +75,7 @@
 
 .stately .section .event .date {
 	float: right;
+	text-align: right;
 }
 
 .stately .section .event .event_title_clear {

@@ -56,15 +56,15 @@
         </div>
         
         <ul id="templates">
+          <li><img src="imgs/templates/barge.jpg" class="show_step" data-step="2" data-template="Barge"></li>
           <li><img src="imgs/templates/stately.jpg" class="show_step" data-step="2" data-template="Stately"></li>
-          <li><img src="imgs/templates/opulant.jpg" class="show_step" data-step="2" data-template="Opulant"></li>
           <li><img src="imgs/templates/neat.jpg" class="show_step" data-step="2" data-template="Neat"></li>
           <li><img src="imgs/templates/savoury.jpg" class="show_step" data-step="2" data-template="Savoury"></li>
           <li><img src="imgs/templates/flange.jpg" class="show_step" data-step="2" data-template="Flange"></li>
           <li><img src="imgs/templates/maestro.jpg" class="show_step" data-step="2" data-template="Maestro"></li>
           <li><img src="imgs/templates/shine.jpg" class="show_step" data-step="2" data-template="Shine"></li>
+          <li><img src="imgs/templates/opulant.jpg" class="show_step" data-step="2" data-template="Opulant"></li>
           <li><img src="imgs/templates/soak.jpg" class="show_step" data-step="2" data-template="Soak"></li>
-          <li><img src="imgs/templates/barge.jpg" class="show_step" data-step="2" data-template="Barge"></li>
           <li><img src="imgs/templates/kite.jpg" class="show_step" data-step="2" data-template="Kite"></li>
         </ul>
         
@@ -111,6 +111,15 @@
             <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UKW9QV6NR7FZQ" class="button">Download Resume Now</a>
             <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UKW9QV6NR7FZQ">Download Your Resume Now<br>(PDF, DOC, Pages, HTML, &amp; RTF format)</a>
             <img src="imgs/cards.jpg" class="cards">
+            
+            <form action="https://www.paypal.com/cgi-bin/webscr" id="paypal_form" method="post" target="_top" style="display: none; ">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="UKW9QV6NR7FZQ">
+            <input type="hidden" name="custom" id="resume_id">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+            
           </div>
           
           <div class="what_do_i_get">
@@ -198,16 +207,21 @@
           <h2 data-field="title">{{ title }}</h2>
         </div>
         <div class="content has_events">
-          {{#events}}
-            <div class="event">
-              <p class="date">{{ date }}</p>
-              <h4 class="title">{{ title }}</h4>
-              <div class="event_title_clear">-</div>
-              <p class="company">{{ company }}</p>
-              <div class="event_company_clear"></div>
-              <div class="description">{{ description }}</div>
-            </div>
-          {{/events}}
+          <div class="events">
+            {{#events_array}}
+              <div class="event" data-id="{{ id }}" data-ordinal="{{ ordinal }}">
+                <p class="move_event">&varr;</p>
+                <p class="remove_event">x</p>
+                <p class="date" data-field="date">{{ date }}</p>
+                <h4 class="title" data-field="title">{{ title }}</h4>
+                <div class="event_title_clear">-</div>
+                <p class="company" data-field="company">{{ company }}</p>
+                <div class="event_company_clear"></div>
+                <div class="description" data-field="description">{{ description }}</div>
+              </div>
+            {{/events_array}}
+          </div>
+          <p class="button gray add_event">Add Event</p>
         </div>
         <div class="clear"></div>
       </div>
@@ -217,16 +231,21 @@
           <h2 data-field="title">{{ title }}</h2>
         </div>
         <div class="content has_events">
-          {{#events}}
-            <div class="event">
-              <p class="date">{{ date }}</p>
-              <h4 class="title">{{ title }}</h4>
-              <div class="event_title_clear">-</div>
-              <p class="company">{{ company }}</p>
-              <div class="event_company_clear"></div>
-              <div class="description">{{ description }}</div>
-            </div>
-          {{/events}}
+          <div class="events">
+            {{#events_array}}
+              <div class="event" data-id="{{ id }}" data-ordinal="{{ ordinal }}">
+                <p class="move_event">&varr;</p>
+                <p class="remove_event">x</p>
+                <p class="date" data-field="date">{{ date }}</p>
+                <h4 class="title" data-field="title">{{ title }}</h4>
+                <div class="event_title_clear">-</div>
+                <p class="company" data-field="institution">{{ institution }}</p>
+                <div class="event_company_clear"></div>
+                <div class="description" data-field="description">{{ description }}</div>
+              </div>
+            {{/events_array}}
+          </div>
+          <p class="button gray add_event">Add Event</p>
         </div>
         <div class="clear"></div>
       </div>
@@ -264,6 +283,7 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-52158070-1', 'rapidresumes.net');
+      ga('require', 'displayfeatures');
       ga('send', 'pageview');
 
     </script>
@@ -271,8 +291,8 @@
 </html>
 
 <!--
-  2. Add/Remove Experience
-  5. Ads!
+  5. Rearrange Experience
+  5. Launch!
   
   - social sharing to cut $10 off
   - objective_suggestions
