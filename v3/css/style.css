@@ -236,10 +236,8 @@ hr {
 
 [data-field] {
 	outline: none;
-	min-width: 2em;
+	min-width: 1em;
 	min-height: 1em;
-	cursor: pointer;
-	white-space: pre-wrap;
 }
 
 [data-field]:hover {
@@ -270,8 +268,6 @@ hr {
 	display: inline-block;
 	text-decoration: none;
 	border-radius: 4px;
-	border: 0;
-	font-size: 16px;
 }
 
 .blue {
@@ -429,7 +425,7 @@ hr {
 	text-decoration: underline;
 }
 
-.dialog {
+#upsell {
 	display: none;
 	background: #fff;
 	background: rgba(255, 255, 255, 0.92);
@@ -441,56 +437,48 @@ hr {
 	z-index: 9999;
 }
 
-.dialog h3 {
+#upsell h3 {
 	font-weight: bold;
 	font-size: 18px;
 	line-height: 30px;
 	text-align: center;
 }
 
-.dialog .inner {
-	top: 20%;
-	position: fixed;
-	left: 50%;
+#upsell h3 strong {
+	display: block;
+	font-size: 36px;
+	line-height: 44px;
+	margin: 5px 0;
+	color: #0059B6;
+}
+
+#upsell .container {
 	background: #fff;
-	width: 450px;
+	max-width: 450px;
+	width: 100%;
 	padding: 30px;
-	margin-left: -225px;
+	margin-top: 10%;
 	border: 1px solid #aaa;
 	border-radius: 7px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.dialog .value {
-	border: 1px solid #ccc;
-	box-shadow: 0 none;
-	font-size: 17px;
-	padding: 10px;
-	outline: none;
-	width: 100%;
-	border-radius: 4px;
-	margin-bottom: 20px;
-}
-
-.dialog textarea {
-	height: 200px;
-}
-
-.dialog .no_button {
+#upsell .no_button {
 	color: #777;
 	font-size: 13px;
 	display: block;
 	text-align: center;
-	float: right;
-	margin-top: 10px;
-	margin-right: 20px;
 }
 
-.dialog .yes_button {
-	float: right;
+#upsell .yes_button {
+	background: #0FA547;
+	font-weight: bold;
+	font-size: 24px;
+	text-align: center;
+	margin: 30px 0 8px;
 }
 
-.dialog .loading {
+#upsell .loading {
 	display: none;
 	position: fixed;
 	z-index: 999999;
@@ -568,8 +556,8 @@ hr {
 
 .what_do_i_get h4 {
 	font-weight: bold;
-	font-size: 24px;
-	line-height: 34px;
+	font-size: 18px;
+	line-height: 27px;
 	margin-bottom: 10px;
 }
 
@@ -617,12 +605,4 @@ hr {
 
 .events {
 	margin-bottom: 20px;
-}
-
-.red {
-	background: #E35E00;
-}
-
-.download_template {
-	margin-bottom: 40px;
 }

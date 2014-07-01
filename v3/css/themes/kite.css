@@ -47,7 +47,7 @@
 	float: right;
 }
 
-.kite .address_comma {
+.kite .zipcode_comma {
 	display: block;
 	visibility: hidden;
 	height: 0px;

@@ -24,12 +24,17 @@ var RRHelpers = {
 var RR = {
 	me: {
 		id: RRHelpers.generateToken(),
-		template: "Shine",
+		template: "Stately",
 		resume: {
 			name: "Your Name",
 			subhead: "Seeking a position in the accounting field where excellent analytical and technical skills can be used to improve the company's profitability.",
-			address: "123 Your Address, Super City, Wyoming, United States, 12345",
-			phone: "1 (906) 937-3473, job-winning@rapidresumes.net",
+			address: "123 Your Address",
+			city: "Super City",
+			state: "Wyoming",
+			country: "United States",
+			zipcode: "12345",
+			phone: "1 (906) 937-3473",
+			email: "job-winning@rapidresumes.net",
 			sections: {}
 		}
 	},
@@ -97,8 +102,10 @@ var RR = {
 		if (RR.me.paid || window.location.hash.indexOf("paid") != -1) {
 			RR.markAsPaid();
 			window.location.hash = "!/" + RR.me.id + "/paid"
-		} else { 
+		} else if (window.location.hash.length) { 
 			RR.markAsInProgress();
+			window.location.hash = "!/" + RR.me.id
+		} else {
 			window.location.hash = "!/" + RR.me.id
 		}
 
@@ -311,6 +318,7 @@ var RR = {
 		}
 		
 		RR.db.child("template").set(template);
+		$("#resume [data-field]").attr("contenteditable", true);
 		$("#templates .selected_template").removeClass("selected_template");
 		$("#templates img[data-template='" + template + "']").addClass("selected_template");
 		$("#current_template_name").text(template);
@@ -342,6 +350,29 @@ $(function() {
 		var template = $(this).data("template");
 		ga("send", "event", "template", "choose_from_screenshot", template);
 		RR.setTemplate(template);
+		return false;
+	});
+
+	$(document).on("blur", "[data-field]", function() {
+		var event = $(this).closest(".event");
+		var section = $(this).closest(".section");
+		var field = $(this).data("field");
+		var value = $(this).text();
+	
+		if (event.length) {
+			var id = event.data("id");
+			RR.me.resume["sections"][section.data("id")]["events"][id][field] = value;
+			RR.db.child("resume").child("sections").child(section.data("id")).child("events").child(id).child(field).set(value);
+		} else if (section.length) {
+			var type = section.data("type");
+			var id = section.data("id");
+			if (typeof id === "undefined") { id = RRHelpers.generateToken(); section.data("id", id); }
+			RR.me.resume["sections"][id][field] = value;
+			RR.db.child("resume").child("sections").child(id).child(field).set(value);
+		} else {
+			RR.me.resume[field] = value;
+			RR.db.child("resume").child(field).set(value);
+		}
 		return false;
 	});
 
@@ -388,6 +419,11 @@ $(function() {
 		$(this).closest(".section").removeClass("highlight");
 	});
 
+	$(document).on("keypress", "#resume [contenteditable]", function(e) {
+		var keycode = (e.keyCode ? e.keyCode : e.which);
+		if (keycode == "13") { $(this).trigger("blur"); return false; }
+	});
+
 	$(document).on("click", "#resume .remove_section", function() {
 		var section = $(this).closest(".section");
 		section.addClass("highlight");
@@ -424,6 +460,7 @@ $(function() {
 	$(document).on("click", ".add_section", function() {
 		var data = { type: $(this).data("type") };
 		RR.addSection(data, false);
+		$("#resume [data-field]").attr("contenteditable", true);
 		return false;
 	});
 
@@ -486,72 +523,5 @@ $(function() {
 		clone.hide().appendTo(section.find(".events")).data("id", id).show(250);
 		RR.makeSortable();
 		RR.hideEventsFirstRemove();
-	});
-	
-	$(document).on("click", "#resume [data-field]", function() {
-		var value = $(this).html();
-		
-		if (value.length < 20) {
-			$(".dialog .type").val("short");
-			$(".dialog input.value").show();
-			$(".dialog textarea.value").hide();
-		} else {
-			$(".dialog .type").val("long");
-			$(".dialog input.value").hide();
-			$(".dialog textarea.value").show();
-		}
-		
-		$(this).addClass("editing");
-		$(".dialog .value").val(value);
-		$(".dialog").show()
-		return false;
-	});
-	
-	$(document).on("click", ".dialog", function(e) {
-		if (!$(e.target).closest(".inner").length) {
-			$(".editing").removeClass("editing");
-			$(this).fadeOut(250);
-		}
-	});
-	
-	$(document).on("click", ".dialog .no_button", function() {
-		$(".dialog").fadeOut(250);
-		$(".editing").removeClass("editing");
-	});
-	
-	$(document).on("submit", ".dialog .content_form", function() {
-		var type = $(this).find(".type").val();
-		var value = null;
-		
-		if (type == "short") {
-			value = $(this).find("input.value").val();
-		} else if (type == "long") {
-			value = $(this).find("textarea.value").val();
-		}
-		
-		var editing = $(".editing")
-		var event = editing.closest(".event");
-		var section = editing.closest(".section");
-		var field = editing.data("field");
-	
-		if (event.length) {
-			var id = event.data("id");
-			RR.me.resume["sections"][section.data("id")]["events"][id][field] = value;
-			RR.db.child("resume").child("sections").child(section.data("id")).child("events").child(id).child(field).set(value);
-		} else if (section.length) {
-			var type = section.data("type");
-			var id = section.data("id");
-			if (typeof id === "undefined") { id = RRHelpers.generateToken(); section.data("id", id); }
-			RR.me.resume["sections"][id][field] = value;
-			RR.db.child("resume").child("sections").child(id).child(field).set(value);
-		} else {
-			RR.me.resume[field] = value;
-			RR.db.child("resume").child(field).set(value);
-		}
-		
-		$(".editing").html(value);
-		$(".editing").removeClass("editing");
-		$(".dialog").fadeOut(250);
-		return false;
 	});
 });

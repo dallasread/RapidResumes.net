@@ -1,75 +1,77 @@
 /*
-	COLOUR: #BD5100
+	COLOUR: #111
 */
 
-.shine {
+.barge {
 	background: #fff;
 	padding: 40px 120px;
-	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+	font-family: Georgia, Times, "Times New Roman", serif;
 	font-size: 12px;
 	line-height: 20px;
 	color: #111;
 }
 
-.shine h1 {
+.barge h1 {
 	font-weight: bold;
-	margin: 11px 0 21px;
-	color: #BD5100;
-	font-size: 50px;
-	line-height: 50px;
+	margin: 11px 0 5px;
+	color: #111;
+	font-size: 46px;
+	line-height: 46px;
 	text-transform: uppercase;
 }
 
-.shine .header {
+.barge .header {
 	margin: 0 auto;
 }
 
-.shine .sections {
+.barge .sections {
 	margin: 0 auto;
 }
 
-.shine .address {
+.barge .pre_address {
 	display: none;
 }
 
-.shine .pre_address {
+.barge .address {
 	font-size: 11px;
 	line-height: 17px;
 	color: #777;
+	margin-bottom: 20px;
 }
 
-.shine .address_comma {
+.barge .zipcode_comma {
 	display: block;
 	visibility: hidden;
 	height: 0px;
 }
 
-.shine .subhead {
+.barge .subhead {
 	font-size: 18px;
 	line-height: 24px;
 	padding-bottom: 10px;
+	color: #777;
 }
 
-.shine .sections {
+.barge .sections {
 	padding-bottom: 30px;
 }
 
-.shine .section {
+.barge .section {
 	border-top: 2px solid #ccc;
 	margin-top: 35px;
 }
 
-.shine .section[data-type="paragraph"], .shine .section[data-type="conclusion"], .shine .section[data-type="introduction"] {
+.barge .section[data-type="paragraph"], .barge .section[data-type="conclusion"], .barge .section[data-type="introduction"] {
 	border-top: 0 none;
 }
 
-.shine .section .h2_wrapper {
-	color: #BD5100;
+.barge .section .h2_wrapper {
+	color: #111;
 	text-align: left;
 	margin-top: -25px;
 }
 
-.shine .section h2 {
+.barge .section h2 {
 	display: inline-block;
 	background: #fff;
 	padding: 10px 10px 10px 0px;
@@ -78,29 +80,26 @@
 	margin-bottom: -5px;
 }
 
-.shine .section .event .company, .shine .section .event .title, .shine .section .event .date {
+.barge .section .event .company, .barge .section .event .title, .barge .section .event .date {
 	font-size: 15px;
 	line-height: 23px;
 	display: inline-block;
 	font-weight: bold;
 }
 
-.shine .section .event {
+.barge .section .event {
 	margin-bottom: 20px;
+	margin-left: 30px;
 }
 
-.shine .section .event:last-child {
+.barge .section .event:last-child {
 	margin-bottom: 0;
 }
 
-.shine .section .event .date {
+.barge .section .event .date {
 	float: right;
 }
 
-.shine .section .event .event_title_clear {
+.barge .section .event .event_title_clear {
 	display: inline-block;
-}
-
-.shine .content {
-	text-align: justify;
 }
